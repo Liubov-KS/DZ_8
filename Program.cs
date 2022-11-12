@@ -99,7 +99,7 @@ for (int i = 1; i < array.GetLength(0); i++)
   }
 }
 
-Console.WriteLine($"\n{minSumLine+1} - строкa с наименьшей суммой ({sumLine}) элементов ");
+Console.WriteLine($"{minSumLine+1} - строкa с наименьшей суммой ({sumLine}) элементов ");
 
 
 int SumLineElements(int[,] array, int i)
@@ -150,25 +150,25 @@ void WriteArray (int[,] array)
 // Результирующая матрица будет:
 // 18 20
 // 15 18
-int m = InputNumbers("Введите число строк 1-й матрицы: ");
+/*int m = InputNumbers("Введите число строк 1-й матрицы: ");
 int n = InputNumbers("Введите число столбцов 1-й матрицы (и строк 2-й): ");
 int p = InputNumbers("Введите число столбцов 2-й матрицы: ");
 int range = InputNumbers("Введите диапазон случайных чисел: от 1 до ");
 
 int[,] firstMartrix = new int[m, n];
 CreateArray(firstMartrix);
-Console.WriteLine($"\nПервая матрица:");
+Console.WriteLine($"Первая матрица:");
 WriteArray(firstMartrix);
 
 int[,] secomdMartrix = new int[n, p];
 CreateArray(secomdMartrix);
-Console.WriteLine($"\nВторая матрица:");
+Console.WriteLine($"Вторая матрица:");
 WriteArray(secomdMartrix);
 
 int[,] resultMatrix = new int[m,p];
 
 MultiplyMatrix(firstMartrix, secomdMartrix, resultMatrix);
-Console.WriteLine($"\nПроизведение первой и второй матриц:");
+Console.WriteLine($"Произведение первой и второй матриц:");
 WriteArray(resultMatrix);
 
 void MultiplyMatrix(int[,] firstMartrix, int[,] secomdMartrix, int[,] resultMatrix)
@@ -217,7 +217,7 @@ void WriteArray (int[,] array)
   }
 }
 
-
+*/
 
 // Задача 60. Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. Напишите программу, 
 // которая будет построчно выводить массив, добавляя индексы каждого элемента.
@@ -226,6 +226,77 @@ void WriteArray (int[,] array)
 // 34(1,0,0) 41(1,1,0)
 // 27(0,0,1) 90(0,1,1)
 // 26(1,0,1) 55(1,1,1)
+
+Console.WriteLine($"Введите размер массива X x Y x Z:");
+int x = InputNumbers("Введите X: ");
+int y = InputNumbers("Введите Y: ");
+int z = InputNumbers("Введите Z: ");
+Console.WriteLine($"");
+
+int[,,] array3D = new int[x, y, z];
+CreateArray(array3D);
+WriteArray(array3D);
+
+int InputNumbers(string input)
+{
+  Console.Write(input);
+  int output = Convert.ToInt32(Console.ReadLine());
+  return output;
+}
+
+void WriteArray (int[,,] array3D)
+{
+  for (int i = 0; i < array3D.GetLength(0); i++)
+  {
+    for (int j = 0; j < array3D.GetLength(1); j++)
+    {
+      Console.Write($"X({i}) Y({j}) ");
+      for (int k = 0; k < array3D.GetLength(2); k++)
+      {
+        Console.Write( $"Z({k})={array3D[i,j,k]}; ");
+      }
+      Console.WriteLine();
+    }
+    Console.WriteLine();
+  }
+}
+
+void CreateArray(int[,,] array3D)
+{
+  int[] temp = new int[array3D.GetLength(0) * array3D.GetLength(1) * array3D.GetLength(2)];
+  int  number;
+  for (int i = 0; i < temp.GetLength(0); i++)
+  {
+    temp[i] = new Random().Next(10, 100);
+    number = temp[i];
+    if (i >= 1)
+    {
+      for (int j = 0; j < i; j++)
+      {
+        while (temp[i] == temp[j])
+        {
+          temp[i] = new Random().Next(10, 100);
+          j = 0;
+          number = temp[i];
+        }
+          number = temp[i];
+      }
+    }
+  }
+  int count = 0; 
+  for (int x = 0; x < array3D.GetLength(0); x++)
+  {
+    for (int y = 0; y < array3D.GetLength(1); y++)
+    {
+      for (int z = 0; z < array3D.GetLength(2); z++)
+      {
+        array3D[x, y, z] = temp[count];
+        count++;
+      }
+    }
+  }
+}
+
 
 
 // Задача 62. Напишите программу, которая заполнит спирально массив 4 на 4.
